@@ -27,23 +27,23 @@ class TweetDatasource{
         }
     }
 
-    async getFeed(min, type1,type2, type3){
+    async getFeed(min, type1,type2, type3, limit){
         // let sql =`
         //     select u.nama,u.username,c.* from "user" u join "chat" c on (u.id=c.iduser) 
         //     -- where c.tweet LIKE '%${cari}%'
         //     // order by c.createddate ${order}
         // `
-        console.log(type1,type2,type3)
+        console.log(type1,type2,type3, limit)
         let sql = ``
         if(type1==''&&type2==''&&type3==''){
             sql =`
             select f.nama as nama_award, m.nama as nama_type, f.awardtype , f.poin  from public.feed f join public.master_award_type m on (f.awardtype=m.kode)
-            where f.poin >= ${min}
+            where f.poin >= ${min} limit ${limit}
             `    
         }else{
             sql =`
             select f.nama as nama_award, m.nama as nama_type, f.awardtype , f.poin  from public.feed f join public.master_award_type m on (f.awardtype=m.kode)
-            where f.poin >= ${min} and f.awardtype in ('${type1}','${type2}','${type3}')
+            where f.poin >= ${min} and f.awardtype in ('${type1}','${type2}','${type3}') limit ${limit}
             `
         }
         

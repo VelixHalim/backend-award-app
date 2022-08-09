@@ -17,8 +17,9 @@ exports.getFeed = asyncHandler(async (req,res,next)=>{
     const type1 = req.query.type1
     const type2 = req.query.type2
     const type3 = req.query.type3
+    const limit = req.query.limit
 
-    const result = await Datasource().FeedDatasource.getFeed(min, type1,type2,type3)
+    const result = await Datasource().FeedDatasource.getFeed(min, type1,type2,type3, limit)
     res.status(200).json({
         success:true,
         data:result
